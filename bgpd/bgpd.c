@@ -51,6 +51,7 @@
 #include "bgpd/bgp_aspath.h"
 #include "bgpd/bgp_route.h"
 #include "bgpd/bgp_dump.h"
+#include "bgpd/bgp_bmp.h"
 #include "bgpd/bgp_debug.h"
 #include "bgpd/bgp_errors.h"
 #include "bgpd/bgp_community.h"
@@ -7987,6 +7988,9 @@ void bgp_init(unsigned short instance)
 
 	/* BFD init */
 	bgp_bfd_init();
+
+	/* BMP init */
+	bgp_bmp_init();
 
 	cmd_variable_handler_register(bgp_viewvrf_var_handlers);
 }

@@ -41,6 +41,7 @@
 #include "bgpd/bgpd.h"
 #include "bgpd/bgp_table.h"
 #include "bgpd/bgp_dump.h"
+#include "bgpd/bgp_bmp.h"
 #include "bgpd/bgp_attr.h"
 #include "bgpd/bgp_debug.h"
 #include "bgpd/bgp_errors.h"
@@ -2216,6 +2217,9 @@ int bgp_process_packet(struct thread *thread)
 
 		/* BGP packet dump function. */
 		bgp_dump_packet(peer, type, peer->curr);
+
+		/* BGP Monitoring Protocol: mirroring. */
+		bmp_mirror_packet(peer, peer->curr);
 
 		/* adjust size to exclude the marker + length + type */
 		size -= BGP_HEADER_SIZE;
